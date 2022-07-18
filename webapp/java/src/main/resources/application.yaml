@@ -1,0 +1,9 @@
+server.port: 3000
+spring.datasource:
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABSE:isucondition}?serverTimezone=Asia/Tokyo&useLegacyDatetimeCode=false
+  username: ${MYSQL_USER:isucon}
+  password: ${MYSQL_PASSWORD:isucon}
+  driver-class-name: com.mysql.cj.jdbc.Driver
+server.servlet.session.persistent: true
+mybatis.configuration:
+    map-underscore-to-camel-case: true

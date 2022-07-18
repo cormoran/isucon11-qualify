@@ -34,6 +34,10 @@ up-php:
 up-ruby:
 	docker-compose -f docker-compose-dev.yml up --build -- backend-ruby mysql-backend jiaapi-mock
 
+.PHONY: up-java
+up-java:
+	docker-compose -f docker-compose-dev.yml up --build -- backend-java mysql-backend jiaapi-mock
+
 .PHONY: down-dev
 down-dev:
 	docker-compose -f docker-compose-dev.yml down
@@ -66,6 +70,10 @@ test-perl:
 test-ruby:
 	target=ruby make test
 
+.PHONY: test-java
+test-java:
+	target=java make test
+
 .PHONY: test
 test:
 	docker-compose -f docker-compose-ci.yml -p isucon11q-ci up -d mysql-backend
@@ -80,23 +88,23 @@ test-load:
 
 .PHONY: up-bench
 up-bench:
-	target=go docker-compose -f docker-compose-bench.yml up --build
+	target=java docker-compose -f docker-compose-bench.yml up --build
 
 .PHONY: run-bench
 run-bench:
-	target=go docker-compose -f docker-compose-bench.yml exec apitest go run ./main.go
+	target=java docker-compose -f docker-compose-bench.yml exec apitest go run ./main.go
 
 .PHONY: run-bench-race
 run-bench-race:
-	target=go docker-compose -f docker-compose-bench.yml exec apitest go run -race ./main.go
+	target=java docker-compose -f docker-compose-bench.yml exec apitest go run -race ./main.go
 
 .PHONY: down-bench
 down-bench:
-	target=go docker-compose -f docker-compose-bench.yml down
+	target=java docker-compose -f docker-compose-bench.yml down
 
 .PHONY: run-bench-noload
 run-bench-noload:
-	target=go docker-compose -f docker-compose-bench.yml exec apitest go run ./main.go --no-load=true
+	target=java docker-compose -f docker-compose-bench.yml exec apitest go run ./main.go --no-load=true
 
 .PHONY: update-assets
 update-assets:
